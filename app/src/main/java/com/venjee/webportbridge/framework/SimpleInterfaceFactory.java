@@ -1,12 +1,12 @@
-package com.skyworthdigital.framework;
+package com.venjee.webportbridge.framework;
 
 import android.content.Context;
-import com.skyworthdigital.framework.interfaces.IBluetoothFunctions;
-import com.skyworthdigital.framework.interfaces.IChipInterfaceFactory;
-import com.skyworthdigital.framework.interfaces.IDisplayFunctions;
-import com.skyworthdigital.framework.interfaces.INetworkFunctions;
-import com.skyworthdigital.framework.interfaces.IOtherFunctions;
-import com.skyworthdigital.framework.interfaces.IPowerFunctions;
+import com.venjee.webportbridge.framework.interfaces.IBluetoothFunctions;
+import com.venjee.webportbridge.framework.interfaces.IChipInterfaceFactory;
+import com.venjee.webportbridge.framework.interfaces.IDisplayFunctions;
+import com.venjee.webportbridge.framework.interfaces.INetworkFunctions;
+import com.venjee.webportbridge.framework.interfaces.IOtherFunctions;
+import com.venjee.webportbridge.framework.interfaces.IPowerFunctions;
 
 public class SimpleInterfaceFactory
 {
@@ -72,8 +72,3 @@ public class SimpleInterfaceFactory
     return mChipInterfaceFactory.getPowerFramworkFN();
   }
 }
-
-/* Location:           C:\Users\venjee_shen\Desktop\反编译\dex2jar-2.0\classes-dex2jar.jar
- * Qualified Name:     com.skyworthdigital.framework.SimpleInterfaceFactory
- * JD-Core Version:    0.6.0
- */

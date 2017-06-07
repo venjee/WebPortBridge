@@ -50,21 +50,9 @@ public class SysPropHelper
           return;
         }
         System.out.println("####:F created!!!");
-        return;
-      }
-      catch (ClassNotFoundException paramContext)
+      } catch (ReflectiveOperationException | SecurityException e)
       {
-        paramContext.printStackTrace();
-        return;
-      }
-      catch (ReflectiveOperationException paramContext)
-      {
-        paramContext.printStackTrace();
-        return;
-      }
-      catch (SecurityException paramContext)
-      {
-        paramContext.printStackTrace();
+        e.printStackTrace();
       }
   }
 
@@ -755,8 +743,3 @@ public class SysPropHelper
     //   22	42	67	java/lang/reflect/InvocationTargetException
   }
 }
-
-/* Location:           C:\Users\venjee_shen\Desktop\反编译\dex2jar-2.0\classes-dex2jar.jar
- * Qualified Name:     com.skyworthdigital.sky2dlauncher.tools.SysPropHelper
- * JD-Core Version:    0.6.0
- */

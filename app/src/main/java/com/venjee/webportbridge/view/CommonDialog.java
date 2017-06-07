@@ -7,47 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.venjee.webportbridge.R;
 
-public class PwdConfirmDialg extends Dialog {
-    private Button mBtn;
-    private OnPwdConfirm mOnConfirm = null;
-    private EditText mPwd;
-    private TextView mTitle;
+public class CommonDialog extends Dialog {
 
-    public PwdConfirmDialg(Context paramContext) {
+    public CommonDialog(Context paramContext) {
         super(paramContext);
-        requestWindowFeature(1);
-        setContentView(R.layout.dialog_input_layou);
-        this.mTitle = ((TextView) findViewById(R.id.dialog_tile));
-        this.mPwd = ((EditText) findViewById(R.id.dialog_pwd));
-        this.mBtn = ((Button) findViewById(R.id.dialog_btn));
-        this.mBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View paramView) {
-                if (PwdConfirmDialg.this.mOnConfirm != null) {
-                    PwdConfirmDialg.this.dismiss();
-                    PwdConfirmDialg.this.mOnConfirm.onConfirm(PwdConfirmDialg.this.mPwd.getText().toString());
-                }
-            }
-        });
     }
 
-    public PwdConfirmDialg(Context paramContext, int paramInt) {
+    private CommonDialog(Context paramContext, int paramInt) {
         super(paramContext, paramInt);
-    }
-
-    public PwdConfirmDialg(Context paramContext, String paramString, OnPwdConfirm paramOnPwdConfirm) {
-        this(paramContext);
-        this.mTitle.setText(paramString);
-        this.mOnConfirm = paramOnPwdConfirm;
-    }
-
-    public void setMsg(String paramString) {
-        this.mTitle.setText(paramString);
     }
 
     public static class Builder {
@@ -61,47 +33,50 @@ public class PwdConfirmDialg extends Dialog {
         private String title;
 
         public Builder(Context paramContext) {
-            this.context = paramContext;
+            context = paramContext;
         }
 
-        public PwdConfirmDialg create() {
-            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final PwdConfirmDialg localPwdConfirmDialg = new PwdConfirmDialg(this.context, R.style.Dialog);
-            View view = inflater.inflate(R.layout.dialog_input_layou, null);
-            localPwdConfirmDialg.addContentView(view, new ViewGroup.LayoutParams(-1, -2));
+        public CommonDialog create() {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final CommonDialog dialog = new CommonDialog(this.context, R.style.Dialog);
+            View view = inflater.inflate(R.layout.dialog_normal_layout, null);
+            dialog.addContentView(view, new ViewGroup.LayoutParams(-1, -2));
             ((TextView) view.findViewById(R.id.title)).setText(this.title);
-            if (this.positiveButtonText != null) {
+            if (positiveButtonText != null) {
+
                 ((Button) view.findViewById(R.id.positiveButton)).setText(this.positiveButtonText);
-                if (this.positiveButtonClickListener != null)
+
+                if (positiveButtonClickListener != null) {
                     (view.findViewById(R.id.positiveButton)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View paramView) {
-                            PwdConfirmDialg.Builder.this.positiveButtonClickListener.onClick(localPwdConfirmDialg, -1);
+                            positiveButtonClickListener.onClick(dialog, -1);
                         }
                     });
-                if (this.negativeButtonText == null) {
-                    ((Button) view.findViewById(R.id.negativeButton)).setText(this.negativeButtonText);
                 }
 
-                if (this.negativeButtonClickListener != null) {
+                ((Button) view.findViewById(R.id.negativeButton)).setText(this.negativeButtonText);
+
+                if (negativeButtonClickListener != null){
                     (view.findViewById(R.id.negativeButton)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View paramView) {
-                            PwdConfirmDialg.Builder.this.negativeButtonClickListener.onClick(localPwdConfirmDialg, -2);
+                            CommonDialog.Builder.this.negativeButtonClickListener.onClick(dialog, -2);
                         }
                     });
                 }
-                if (this.message != null) {
-                    ((TextView) view.findViewById(R.id.message)).setText(this.message);
+
+                if (message != null) {
+                    ((TextView)view.findViewById(R.id.message)).setText(this.message);
                 }
-            } else {
-                localPwdConfirmDialg.setContentView(view);
+            }else {
+                dialog.setContentView(view);
                 view.findViewById(R.id.positiveButton).setVisibility(View.GONE);
                 view.findViewById(R.id.negativeButton).setVisibility(View.GONE);
-                if (this.contentView != null) {
-                    ((LinearLayout) view.findViewById(R.id.content)).removeAllViews();
+                if(contentView != null) {
+                    ((LinearLayout)view.findViewById(R.id.content)).removeAllViews();
                     ((LinearLayout) view.findViewById(R.id.content)).addView(this.contentView, new ViewGroup.LayoutParams(-1, -1));
                 }
             }
-            return localPwdConfirmDialg;
+            return dialog;
         }
 
         public Builder setContentView(View paramView) {
@@ -152,9 +127,5 @@ public class PwdConfirmDialg extends Dialog {
             this.title = paramString;
             return this;
         }
-    }
-
-    public static abstract interface OnPwdConfirm {
-        public abstract void onConfirm(String paramString);
     }
 }

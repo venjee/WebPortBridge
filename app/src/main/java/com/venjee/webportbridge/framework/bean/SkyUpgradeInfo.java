@@ -1,4 +1,4 @@
-package com.skyworthdigital.framework.bean;
+package com.venjee.webportbridge.framework.bean;
 
 public class SkyUpgradeInfo
 {
@@ -30,8 +30,3 @@ public class SkyUpgradeInfo
     return this.mHasUpgrade + ", mNewVersion=" + this.mNewVersion + "]";
   }
 }
-
-/* Location:           C:\Users\venjee_shen\Desktop\反编译\dex2jar-2.0\classes-dex2jar.jar
- * Qualified Name:     com.skyworthdigital.framework.bean.SkyUpgradeInfo
- * JD-Core Version:    0.6.0
- */
