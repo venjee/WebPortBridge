@@ -51,15 +51,15 @@ public class MainActivity extends Activity {
     private int kIndex = 0;
 
     BroadcastReceiver mBroadcast = new BroadcastReceiver() {
-        public void onReceive(Context paramContext, Intent paramIntent) {
-            if (paramIntent.getAction().equals("android.net.conn.CONNECTIVITY_CHANGE")) {
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("android.net.conn.CONNECTIVITY_CHANGE")) {
                 handleView();
             }
-            if (paramIntent.getAction().equals(ActionString.UPDATE_APK)) {
-                handleUpdateApk(paramIntent.getStringExtra("file"));
+            if (intent.getAction().equals(ActionString.UPDATE_APK)) {
+                handleUpdateApk(intent.getStringExtra("file"));
             }
 
-            if (paramIntent.getAction().equals(ActionString.UPDATE_FIRMWARE)) {
+            if (intent.getAction().equals(ActionString.UPDATE_FIRMWARE)) {
                 handleUpdateFw();
             }
         }
